@@ -71,11 +71,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--color-background)]">
-      <Header />
+      <Header
+        searchValue={searchQuery}
+        onSearchChange={handleSearchChange}
+        onRandomClick={handleRandomWord}
+      />
 
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-6 sm:py-8">
-        {/* Search + Random */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        {/* Search + Random - hidden on mobile (shown in header) */}
+        <div className="hidden sm:flex flex-col sm:flex-row items-center gap-4 mb-6">
           <div className="flex-1 w-full">
             <SearchBar value={searchQuery} onChange={handleSearchChange} />
           </div>

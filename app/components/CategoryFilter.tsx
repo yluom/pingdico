@@ -47,7 +47,7 @@ export default function CategoryFilter({
         {/* Trigger button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-10 w-full flex items-center justify-between gap-3 px-4 py-3 bg-white rounded-2xl border-2 border-[var(--color-secondary)]/10 shadow-sm active:scale-[0.98] transition-all duration-200"
+          className="relative z-10 w-full flex items-center justify-between gap-3 px-4 py-3 bg-[var(--color-surface)] rounded-2xl border-2 border-[var(--color-muted)] shadow-sm active:scale-[0.98] transition-all duration-200"
         >
           <div className="flex items-center gap-3">
             <span className="text-xl">
@@ -58,7 +58,7 @@ export default function CategoryFilter({
             </span>
           </div>
           <svg
-            className={`w-5 h-5 text-[var(--color-secondary)]/50 transition-transform duration-300 ${
+            className={`w-5 h-5 text-white/50 transition-transform duration-300 ${
               isOpen ? "rotate-180" : ""
             }`}
             fill="none"
@@ -75,14 +75,14 @@ export default function CategoryFilter({
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
-          <div className="p-2 bg-white rounded-2xl border-2 border-[var(--color-secondary)]/10 shadow-xl">
+          <div className="p-2 bg-[var(--color-surface)] rounded-2xl border-2 border-[var(--color-muted)] shadow-xl">
             {/* All option */}
             <button
               onClick={() => handleSelect(null)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                 selected === null
-                  ? "bg-[var(--color-secondary)] text-white"
-                  : "hover:bg-[var(--color-secondary)]/5"
+                  ? "bg-[var(--color-muted)] text-white"
+                  : "text-white/80 hover:bg-[var(--color-muted)]/50"
               }`}
             >
               <span className="text-xl">✨</span>
@@ -102,7 +102,7 @@ export default function CategoryFilter({
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                   selected === category.id
                     ? "bg-[var(--color-primary)] text-white"
-                    : "hover:bg-[var(--color-primary)]/5"
+                    : "text-white/80 hover:bg-[var(--color-primary)]/10"
                 }`}
               >
                 <span className="text-xl">{category.emoji}</span>
@@ -124,8 +124,8 @@ export default function CategoryFilter({
           onClick={() => onSelect(null)}
           className={`flex items-center gap-1.5 px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap transition-all duration-200 ${
             selected === null
-              ? "bg-[var(--color-secondary)] text-white shadow-md shadow-[var(--color-secondary)]/30 scale-105"
-              : "bg-white text-[var(--color-secondary)] border-2 border-[var(--color-secondary)]/10 hover:border-[var(--color-secondary)]/30 hover:bg-[var(--color-secondary)]/5"
+              ? "bg-[var(--color-muted)] text-white shadow-md shadow-black/30 scale-105"
+              : "bg-[var(--color-surface)] text-white/80 border-2 border-[var(--color-muted)] hover:border-white/30 hover:bg-[var(--color-muted)]/50"
           }`}
         >
           <span>✨</span>
@@ -138,7 +138,7 @@ export default function CategoryFilter({
             className={`flex items-center gap-1.5 px-4 py-2 rounded-full font-semibold text-sm whitespace-nowrap transition-all duration-200 ${
               selected === category.id
                 ? "bg-[var(--color-primary)] text-white shadow-md shadow-[var(--color-primary)]/30 scale-105"
-                : "bg-white text-[var(--color-foreground)] border-2 border-[var(--color-secondary)]/10 hover:border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/5"
+                : "bg-[var(--color-surface)] text-[var(--color-foreground)] border-2 border-[var(--color-muted)] hover:border-[var(--color-primary)]/50 hover:bg-[var(--color-primary)]/10"
             }`}
           >
             <span>{category.emoji}</span>

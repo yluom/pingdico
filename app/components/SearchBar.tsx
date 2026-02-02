@@ -13,7 +13,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
 
       <div className="relative">
         {/* Search icon */}
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]/40">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40">
           <svg
             className="w-5 h-5"
             fill="none"
@@ -34,14 +34,14 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Chercher un terme..."
-          className="peer w-full bg-white pl-12 pr-4 py-4 rounded-2xl text-[var(--color-foreground)] placeholder:text-[var(--color-secondary)]/40 border-2 border-[var(--color-secondary)]/10 shadow-lg shadow-[var(--color-secondary)]/5 focus:outline-none focus:border-[var(--color-primary)] focus:shadow-[var(--color-primary)]/10 transition-all duration-300 text-base sm:text-lg font-medium"
+          className="peer w-full bg-[var(--color-surface)] pl-12 pr-4 py-4 rounded-2xl text-[var(--color-foreground)] placeholder:text-white/40 border-2 border-[var(--color-muted)] shadow-lg shadow-black/20 focus:outline-none focus:border-[var(--color-primary)] focus:shadow-[var(--color-primary)]/20 transition-all duration-300 text-base sm:text-lg font-medium"
         />
 
         {/* Clear button */}
         {value && (
           <button
             onClick={() => onChange("")}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]/40 hover:text-[var(--color-primary)] transition-colors duration-200"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-[var(--color-primary)] transition-colors duration-200"
             aria-label="Effacer la recherche"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

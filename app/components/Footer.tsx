@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[var(--color-secondary)] py-8 px-4 overflow-hidden">
+    <footer className="relative bg-[#0A0A0A] py-8 px-4 overflow-hidden border-t border-[var(--color-muted)]">
       {/* Subtle pattern */}
       <div className="absolute inset-0 opacity-5">
         <div

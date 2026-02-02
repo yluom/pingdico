@@ -8,7 +8,7 @@ export default function RandomWordButton({ onClick }: RandomWordButtonProps) {
   return (
     <button
       onClick={onClick}
-      className="group relative inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-br from-[var(--color-primary)] to-[#e55a2b] text-white font-bold rounded-xl shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-xl hover:shadow-[var(--color-primary)]/40 hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden"
+      className="group relative inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-br from-[var(--color-primary)] to-[#B22D38] text-white font-bold rounded-xl shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-xl hover:shadow-[var(--color-primary)]/40 hover:scale-105 active:scale-95 transition-all duration-200 overflow-hidden"
     >
       {/* Shine effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
