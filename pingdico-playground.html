@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PingDico Design Playground</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ui-bg: #1a1a2e;
+      --ui-surface: #16213e;
+      --ui-border: #2a3f5f;
+      --ui-text: #e8e8e8;
+      --ui-muted: #8b9dc3;
+      --ui-accent: #ff6b35;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--ui-bg);
+      color: var(--ui-text);
+      min-height: 100vh;
+    }
+
+    .playground {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Controls Panel */
+    .controls {
+      background: var(--ui-surface);
+      border-right: 1px solid var(--ui-border);
+      padding: 20px;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+
+    .controls h1 {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--ui-accent);
+    }
+
+    .controls .subtitle {
+      font-size: 0.75rem;
+      color: var(--ui-muted);
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ui-muted);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--ui-border);
+    }
+
+    .control-group {
+      margin-bottom: 16px;
+    }
+
+    .control-group label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      color: var(--ui-text);
+    }
+
+    select, input[type="range"] {
+      width: 100%;
+      background: var(--ui-bg);
+      border: 1px solid var(--ui-border);
+      color: var(--ui-text);
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--ui-accent);
+    }
+
+    input[type="range"] {
+      padding: 0;
+      height: 6px;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: var(--ui-accent);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .range-value {
+      font-size: 0.7rem;
+      color: var(--ui-muted);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Presets */
+    .presets {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .preset-btn {
+      background: var(--ui-bg);
+      border: 1px solid var(--ui-border);
+      color: var(--ui-text);
+      padding: 10px 8px;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--ui-accent);
+      background: rgba(255, 107, 53, 0.1);
+    }
+
+    .preset-btn.active {
+      border-color: var(--ui-accent);
+      background: rgba(255, 107, 53, 0.2);
+    }
+
+    .preset-emoji {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
+    /* Preview Area */
+    .preview-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-container {
+      flex: 1;
+      overflow: auto;
+      padding: 0;
+    }
+
+    .preview-frame {
+      min-height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    /* Prompt Output */
+    .prompt-output {
+      background: var(--ui-surface);
+      border-top: 1px solid var(--ui-border);
+      padding: 16px 20px;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .prompt-header span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ui-muted);
+    }
+
+    .copy-btn {
+      background: var(--ui-accent);
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .copy-btn.copied {
+      background: #2ecc71;
+    }
+
+    .prompt-text {
+      font-family: 'SF Mono', Monaco, 'Consolas', monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--ui-text);
+      background: var(--ui-bg);
+      padding: 12px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    /* Toggle Switch */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .toggle-row label {
+      margin-bottom: 0;
+    }
+
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--ui-bg);
+      border: 1px solid var(--ui-border);
+      border-radius: 22px;
+      transition: 0.3s;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 2px;
+      bottom: 2px;
+      background: var(--ui-muted);
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: rgba(255, 107, 53, 0.3);
+      border-color: var(--ui-accent);
+    }
+
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(18px);
+      background: var(--ui-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="playground">
+    <!-- Controls Panel -->
+    <div class="controls">
+      <h1>🏓 PingDico Playground</h1>
+      <p class="subtitle">Explorez les styles visuels</p>
+
+      <!-- Presets -->
+      <div class="section">
+        <div class="section-title">Presets</div>
+        <div class="presets">
+          <button class="preset-btn" data-preset="classic">
+            <span class="preset-emoji">🎯</span>
+            Classique
+          </button>
+          <button class="preset-btn" data-preset="neon">
+            <span class="preset-emoji">🌙</span>
+            Néon Rétro
+          </button>
+          <button class="preset-btn" data-preset="comic">
+            <span class="preset-emoji">💥</span>
+            Bande Dessinée
+          </button>
+          <button class="preset-btn" data-preset="minimal">
+            <span class="preset-emoji">✨</span>
+            Minimal
+          </button>
+          <button class="preset-btn" data-preset="brutalist">
+            <span class="preset-emoji">🏗️</span>
+            Brutaliste
+          </button>
+          <button class="preset-btn" data-preset="pastel">
+            <span class="preset-emoji">🍬</span>
+            Pastel Doux
+          </button>
+        </div>
+      </div>
+
+      <!-- Theme -->
+      <div class="section">
+        <div class="section-title">Thème & Couleurs</div>
+        <div class="control-group">
+          <label>Palette de couleurs</label>
+          <select id="colorTheme">
+            <option value="vibrant">🔥 Orange Vibrant (PRD)</option>
+            <option value="neon">🌙 Néon Cyber</option>
+            <option value="mono">⚫ Monochrome</option>
+            <option value="pastel">🍬 Pastel Doux</option>
+            <option value="forest">🌲 Forêt</option>
+            <option value="sunset">🌅 Coucher de soleil</option>
+          </select>
+        </div>
+        <div class="toggle-row">
+          <label>Mode sombre</label>
+          <label class="toggle">
+            <input type="checkbox" id="darkMode">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Layout -->
+      <div class="section">
+        <div class="section-title">Layout</div>
+        <div class="control-group">
+          <label>Disposition des cartes</label>
+          <select id="layout">
+            <option value="grid">📱 Grille responsive</option>
+            <option value="masonry">🧱 Masonry</option>
+            <option value="list">📋 Liste verticale</option>
+            <option value="magazine">📰 Magazine</option>
+            <option value="carousel">🎠 Carousel horizontal</option>
+            <option value="bento">🍱 Bento Box</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Espacement</label>
+          <input type="range" id="spacing" min="8" max="40" value="20">
+          <div class="range-value"><span id="spacingValue">20</span>px</div>
+        </div>
+      </div>
+
+      <!-- Header Style -->
+      <div class="section">
+        <div class="section-title">Header / Hero</div>
+        <div class="control-group">
+          <label>Style de header</label>
+          <select id="headerStyle">
+            <option value="classic">🏠 Classique centré</option>
+            <option value="bold">💪 Bold asymétrique</option>
+            <option value="floating">☁️ Flottant minimal</option>
+            <option value="retro">📺 Rétro arcade</option>
+            <option value="wave">🌊 Vague animée</option>
+            <option value="split">⚡ Split diagonal</option>
+          </select>
+        </div>
+        <div class="toggle-row">
+          <label>Animation du titre</label>
+          <label class="toggle">
+            <input type="checkbox" id="animateTitle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Card Style -->
+      <div class="section">
+        <div class="section-title">Style des cartes</div>
+        <div class="control-group">
+          <label>Design des cartes</label>
+          <select id="cardStyle">
+            <option value="elevated">🎴 Élevée (shadow)</option>
+            <option value="flat">📄 Plate (bordure)</option>
+            <option value="glassmorphism">🔮 Glassmorphism</option>
+            <option value="neumorphism">🥚 Neumorphism</option>
+            <option value="comic">💥 Bande dessinée</option>
+            <option value="sticky">📝 Post-it</option>
+            <option value="brutalist">🏗️ Brutaliste</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Rayon des coins</label>
+          <input type="range" id="borderRadius" min="0" max="32" value="12">
+          <div class="range-value"><span id="borderRadiusValue">12</span>px</div>
+        </div>
+        <div class="toggle-row">
+          <label>Effet hover</label>
+          <label class="toggle">
+            <input type="checkbox" id="hoverEffect" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="section">
+        <div class="section-title">Typographie</div>
+        <div class="control-group">
+          <label>Police des titres</label>
+          <select id="titleFont">
+            <option value="inter">Inter (moderne)</option>
+            <option value="poppins">Poppins (friendly)</option>
+            <option value="space">Space Grotesk (tech)</option>
+            <option value="playfair">Playfair (élégant)</option>
+            <option value="bangers">Bangers (comic)</option>
+            <option value="bebas">Bebas Neue (bold)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>Taille de base</label>
+          <input type="range" id="fontSize" min="14" max="20" value="16">
+          <div class="range-value"><span id="fontSizeValue">16</span>px</div>
+        </div>
+      </div>
+
+      <!-- Extras -->
+      <div class="section">
+        <div class="section-title">Effets & Extras</div>
+        <div class="toggle-row">
+          <label>Emojis dans les cartes</label>
+          <label class="toggle">
+            <input type="checkbox" id="showEmojis" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <label>Badges catégorie</label>
+          <label class="toggle">
+            <input type="checkbox" id="showBadges" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <label>Variantes régionales</label>
+          <label class="toggle">
+            <input type="checkbox" id="showVariants" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview Area -->
+    <div class="preview-area">
+      <div class="preview-container">
+        <div class="preview-frame" id="preview">
+          <!-- Preview content rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Prompt Output -->
+      <div class="prompt-output">
+        <div class="prompt-header">
+          <span>Prompt généré</span>
+          <button class="copy-btn" id="copyBtn">Copier le prompt</button>
+        </div>
+        <div class="prompt-text" id="promptText">
+          <!-- Prompt text rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data
+    const termes = [
+      {
+        id: "carotte",
+        terme: "Carotte",
+        definition: "Point gagné par la chance pure, généralement grâce à un filet favorable ou un bord de table.",
+        exemple: "\"Il m'a mis 6 carottes en un set, j'étais dégoûté.\"",
+        categorie: "chance",
+        emoji: "🥕",
+        variantes: [
+          { terme: "Kartoffel", pays: "🇩🇪" },
+          { terme: "Point de cul", pays: "🇧🇪" }
+        ],
+        synonymes: ["gratte", "bol"]
+      },
+      {
+        id: "gratte",
+        terme: "Gratte",
+        definition: "Balle qui frôle le filet ou le bord de table, changeant imprévisiblement sa trajectoire.",
+        exemple: "\"Encore une gratte au filet, c'est pas possible !\"",
+        categorie: "chance",
+        emoji: "🎱",
+        variantes: [
+          { terme: "Net", pays: "🇬🇧" }
+        ],
+        synonymes: ["let", "filet"]
+      },
+      {
+        id: "topspin",
+        terme: "Topspin",
+        definition: "Coup lifté avec rotation avant qui fait plonger la balle. Le coup offensif par excellence.",
+        exemple: "\"Son topspin revers est dévastateur, impossible à bloquer.\"",
+        categorie: "coups",
+        emoji: "🌀",
+        variantes: [
+          { terme: "Lift", pays: "🇫🇷" },
+          { terme: "Top", pays: "🇫🇷" }
+        ],
+        synonymes: ["lift", "rotation avant"]
+      },
+      {
+        id: "testonite",
+        terme: "Testonite",
+        definition: "Obsession maladive de tester du nouveau matériel, convaincu que la raquette parfaite existe.",
+        exemple: "\"Jean-Pierre a encore la testonite, il a commandé 4 plaques cette semaine.\"",
+        categorie: "personnages",
+        emoji: "🔬",
+        variantes: [],
+        synonymes: ["equipment junkie"]
+      },
+      {
+        id: "service-bombe",
+        terme: "Service bombe",
+        definition: "Service ultra rapide et puissant, souvent difficilement contrôlable par le serveur lui-même.",
+        exemple: "\"Attention à son service bombe, ça part à 100 à l'heure.\"",
+        categorie: "services",
+        emoji: "💣",
+        variantes: [],
+        synonymes: ["missile", "boulet"]
+      }
+    ];
+
+    const categories = {
+      chance: { label: "Chance", emoji: "🍀", color: "#2ecc71" },
+      coups: { label: "Coups", emoji: "💥", color: "#e74c3c" },
+      services: { label: "Services", emoji: "🎯", color: "#9b59b6" },
+      materiel: { label: "Matériel", emoji: "🔧", color: "#3498db" },
+      resultats: { label: "Résultats", emoji: "📊", color: "#f39c12" },
+      expressions: { label: "Expressions", emoji: "🗣️", color: "#1abc9c" },
+      personnages: { label: "Personnages", emoji: "🎭", color: "#e91e63" }
+    };
+
+    // Theme definitions
+    const themes = {
+      vibrant: {
+        primary: "#FF6B35",
+        secondary: "#1E3A5F",
+        accent: "#2ECC71",
+        bg: "#FAFAFA",
+        surface: "#FFFFFF",
+        text: "#2D3436",
+        muted: "#636e72"
+      },
+      neon: {
+        primary: "#00f5d4",
+        secondary: "#7209b7",
+        accent: "#f72585",
+        bg: "#0a0a0f",
+        surface: "#1a1a2e",
+        text: "#ffffff",
+        muted: "#8b9dc3"
+      },
+      mono: {
+        primary: "#2d2d2d",
+        secondary: "#4a4a4a",
+        accent: "#000000",
+        bg: "#ffffff",
+        surface: "#f5f5f5",
+        text: "#1a1a1a",
+        muted: "#666666"
+      },
+      pastel: {
+        primary: "#ffb3ba",
+        secondary: "#bae1ff",
+        accent: "#baffc9",
+        bg: "#fff9f0",
+        surface: "#ffffff",
+        text: "#4a4a4a",
+        muted: "#888888"
+      },
+      forest: {
+        primary: "#2d6a4f",
+        secondary: "#40916c",
+        accent: "#95d5b2",
+        bg: "#f0f4f0",
+        surface: "#ffffff",
+        text: "#1b4332",
+        muted: "#52796f"
+      },
+      sunset: {
+        primary: "#ff6b6b",
+        secondary: "#feca57",
+        accent: "#48dbfb",
+        bg: "#fff5f5",
+        surface: "#ffffff",
+        text: "#2d3436",
+        muted: "#636e72"
+      }
+    };
+
+    // Presets
+    const presets = {
+      classic: {
+        colorTheme: "vibrant",
+        darkMode: false,
+        layout: "grid",
+        spacing: 20,
+        headerStyle: "classic",
+        animateTitle: true,
+        cardStyle: "elevated",
+        borderRadius: 12,
+        hoverEffect: true,
+        titleFont: "inter",
+        fontSize: 16,
+        showEmojis: true,
+        showBadges: true,
+        showVariants: true
+      },
+      neon: {
+        colorTheme: "neon",
+        darkMode: true,
+        layout: "masonry",
+        spacing: 16,
+        headerStyle: "retro",
+        animateTitle: true,
+        cardStyle: "glassmorphism",
+        borderRadius: 16,
+        hoverEffect: true,
+        titleFont: "space",
+        fontSize: 16,
+        showEmojis: true,
+        showBadges: true,
+        showVariants: false
+      },
+      comic: {
+        colorTheme: "vibrant",
+        darkMode: false,
+        layout: "magazine",
+        spacing: 12,
+        headerStyle: "bold",
+        animateTitle: true,
+        cardStyle: "comic",
+        borderRadius: 4,
+        hoverEffect: true,
+        titleFont: "bangers",
+        fontSize: 18,
+        showEmojis: true,
+        showBadges: true,
+        showVariants: true
+      },
+      minimal: {
+        colorTheme: "mono",
+        darkMode: false,
+        layout: "list",
+        spacing: 24,
+        headerStyle: "floating",
+        animateTitle: false,
+        cardStyle: "flat",
+        borderRadius: 0,
+        hoverEffect: false,
+        titleFont: "inter",
+        fontSize: 15,
+        showEmojis: false,
+        showBadges: false,
+        showVariants: false
+      },
+      brutalist: {
+        colorTheme: "mono",
+        darkMode: false,
+        layout: "bento",
+        spacing: 8,
+        headerStyle: "split",
+        animateTitle: false,
+        cardStyle: "brutalist",
+        borderRadius: 0,
+        hoverEffect: true,
+        titleFont: "bebas",
+        fontSize: 16,
+        showEmojis: true,
+        showBadges: true,
+        showVariants: true
+      },
+      pastel: {
+        colorTheme: "pastel",
+        darkMode: false,
+        layout: "grid",
+        spacing: 24,
+        headerStyle: "wave",
+        animateTitle: true,
+        cardStyle: "neumorphism",
+        borderRadius: 24,
+        hoverEffect: true,
+        titleFont: "poppins",
+        fontSize: 16,
+        showEmojis: true,
+        showBadges: true,
+        showVariants: true
+      }
+    };
+
+    // State
+    const state = {
+      colorTheme: "vibrant",
+      darkMode: false,
+      layout: "grid",
+      spacing: 20,
+      headerStyle: "classic",
+      animateTitle: true,
+      cardStyle: "elevated",
+      borderRadius: 12,
+      hoverEffect: true,
+      titleFont: "inter",
+      fontSize: 16,
+      showEmojis: true,
+      showBadges: true,
+      showVariants: true
+    };
+
+    // Font URLs
+    const fontUrls = {
+      inter: "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap",
+      poppins: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap",
+      space: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap",
+      playfair: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&display=swap",
+      bangers: "https://fonts.googleapis.com/css2?family=Bangers&display=swap",
+      bebas: "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+    };
+
+    const fontFamilies = {
+      inter: "'Inter', sans-serif",
+      poppins: "'Poppins', sans-serif",
+      space: "'Space Grotesk', sans-serif",
+      playfair: "'Playfair Display', serif",
+      bangers: "'Bangers', cursive",
+      bebas: "'Bebas Neue', sans-serif"
+    };
+
+    // Initialize
+    function init() {
+      bindControls();
+      bindPresets();
+      bindCopyButton();
+      updateAll();
+    }
+
+    function bindControls() {
+      // Selects
+      ['colorTheme', 'layout', 'headerStyle', 'cardStyle', 'titleFont'].forEach(id => {
+        document.getElementById(id).addEventListener('change', e => {
+          state[id] = e.target.value;
+          updateAll();
+        });
+      });
+
+      // Ranges
+      ['spacing', 'borderRadius', 'fontSize'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('input', e => {
+          state[id] = parseInt(e.target.value);
+          document.getElementById(id + 'Value').textContent = e.target.value;
+          updateAll();
+        });
+      });
+
+      // Toggles
+      ['darkMode', 'animateTitle', 'hoverEffect', 'showEmojis', 'showBadges', 'showVariants'].forEach(id => {
+        document.getElementById(id).addEventListener('change', e => {
+          state[id] = e.target.checked;
+          updateAll();
+        });
+      });
+    }
+
+    function bindPresets() {
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const preset = presets[btn.dataset.preset];
+          Object.assign(state, preset);
+          syncControlsToState();
+          updateAll();
+
+          document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    }
+
+    function syncControlsToState() {
+      ['colorTheme', 'layout', 'headerStyle', 'cardStyle', 'titleFont'].forEach(id => {
+        document.getElementById(id).value = state[id];
+      });
+
+      ['spacing', 'borderRadius', 'fontSize'].forEach(id => {
+        document.getElementById(id).value = state[id];
+        document.getElementById(id + 'Value').textContent = state[id];
+      });
+
+      ['darkMode', 'animateTitle', 'hoverEffect', 'showEmojis', 'showBadges', 'showVariants'].forEach(id => {
+        document.getElementById(id).checked = state[id];
+      });
+    }
+
+    function bindCopyButton() {
+      const btn = document.getElementById('copyBtn');
+      btn.addEventListener('click', () => {
+        const text = document.getElementById('promptText').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          btn.textContent = 'Copié !';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            btn.textContent = 'Copier le prompt';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+    }
+
+    function updateAll() {
+      renderPreview();
+      updatePrompt();
+    }
+
+    function getTheme() {
+      const base = themes[state.colorTheme];
+      if (state.darkMode && state.colorTheme !== 'neon') {
+        return {
+          ...base,
+          bg: '#0f0f0f',
+          surface: '#1a1a1a',
+          text: '#ffffff',
+          muted: '#888888'
+        };
+      }
+      return base;
+    }
+
+    function renderPreview() {
+      const theme = getTheme();
+      const preview = document.getElementById('preview');
+
+      preview.innerHTML = `
+        <style>
+          @import url('${fontUrls[state.titleFont]}');
+
+          .site {
+            min-height: 100%;
+            background: ${theme.bg};
+            color: ${theme.text};
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: ${state.fontSize}px;
+          }
+
+          .site * {
+            box-sizing: border-box;
+          }
+
+          /* Headers */
+          ${getHeaderStyles(theme)}
+
+          /* Content */
+          .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: ${state.spacing}px;
+          }
+
+          /* Category filters */
+          .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: ${state.spacing}px;
+            justify-content: center;
+          }
+
+          .filter-btn {
+            background: ${theme.surface};
+            border: 2px solid ${theme.primary}33;
+            color: ${theme.text};
+            padding: 8px 16px;
+            border-radius: ${state.borderRadius}px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+          }
+
+          .filter-btn:hover, .filter-btn.active {
+            background: ${theme.primary};
+            color: white;
+            border-color: ${theme.primary};
+          }
+
+          /* Random button */
+          .random-btn {
+            display: block;
+            margin: 0 auto ${state.spacing * 1.5}px;
+            background: linear-gradient(135deg, ${theme.primary}, ${theme.secondary});
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            border-radius: ${state.borderRadius}px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px ${theme.primary}40;
+          }
+
+          .random-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px ${theme.primary}60;
+          }
+
+          /* Layouts */
+          ${getLayoutStyles(theme)}
+
+          /* Cards */
+          ${getCardStyles(theme)}
+
+          /* Footer */
+          .footer {
+            text-align: center;
+            padding: ${state.spacing * 2}px;
+            color: ${theme.muted};
+            font-size: 0.85em;
+            border-top: 1px solid ${theme.text}15;
+            margin-top: ${state.spacing * 2}px;
+          }
+
+          .footer a {
+            color: ${theme.primary};
+            text-decoration: none;
+          }
+        </style>
+
+        <div class="site">
+          ${getHeaderHTML(theme)}
+
+          <div class="content">
+            <button class="random-btn">🎲 Un mot au hasard</button>
+
+            <div class="filters">
+              ${Object.entries(categories).map(([key, cat]) => `
+                <button class="filter-btn ${key === 'chance' ? 'active' : ''}">
+                  ${cat.emoji} ${cat.label}
+                </button>
+              `).join('')}
+            </div>
+
+            <div class="terms-container ${state.layout}">
+              ${termes.map((t, i) => getCardHTML(t, i, theme)).join('')}
+            </div>
+          </div>
+
+          <footer class="footer">
+            Fait avec 🏓 par des pongistes · <a href="#">GitHub</a> · <a href="#">Contact</a>
+          </footer>
+        </div>
+      `;
+    }
+
+    function getHeaderStyles(theme) {
+      const titleFont = fontFamilies[state.titleFont];
+      const animate = state.animateTitle ? `
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        .header-emoji { animation: bounce 2s ease-in-out infinite; display: inline-block; }
+      ` : '.header-emoji { display: inline-block; }';
+
+      const base = `
+        ${animate}
+        .header { text-align: center; }
+        .header h1 {
+          font-family: ${titleFont};
+          margin: 0;
+          color: ${theme.text};
+        }
+        .header .tagline {
+          color: ${theme.muted};
+          font-style: italic;
+        }
+        .search-bar {
+          max-width: 400px;
+          margin: 0 auto;
+          position: relative;
+        }
+        .search-bar input {
+          width: 100%;
+          padding: 12px 20px 12px 45px;
+          border: 2px solid ${theme.text}20;
+          border-radius: ${state.borderRadius}px;
+          font-size: 1em;
+          background: ${theme.surface};
+          color: ${theme.text};
+        }
+        .search-bar input:focus {
+          outline: none;
+          border-color: ${theme.primary};
+        }
+        .search-bar::before {
+          content: "🔍";
+          position: absolute;
+          left: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      `;
+
+      switch (state.headerStyle) {
+        case 'classic':
+          return base + `
+            .header {
+              padding: ${state.spacing * 2}px;
+              background: ${theme.surface};
+            }
+            .header h1 { font-size: 2.5em; }
+          `;
+        case 'bold':
+          return base + `
+            .header {
+              padding: ${state.spacing * 3}px;
+              background: linear-gradient(135deg, ${theme.primary}, ${theme.secondary});
+              clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            }
+            .header h1 { font-size: 4em; color: white; text-transform: uppercase; letter-spacing: -2px; }
+            .header .tagline { color: rgba(255,255,255,0.8); }
+            .search-bar input { background: rgba(255,255,255,0.95); }
+          `;
+        case 'floating':
+          return base + `
+            .header {
+              padding: ${state.spacing}px;
+              position: sticky;
+              top: 0;
+              background: ${theme.bg}ee;
+              backdrop-filter: blur(10px);
+              z-index: 100;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-bottom: 1px solid ${theme.text}10;
+            }
+            .header h1 { font-size: 1.5em; }
+            .header .tagline { display: none; }
+            .search-bar { margin: 0; width: 250px; }
+          `;
+        case 'retro':
+          return base + `
+            .header {
+              padding: ${state.spacing * 2}px;
+              background: ${theme.bg};
+              border-bottom: 4px solid ${theme.primary};
+            }
+            .header h1 {
+              font-size: 3em;
+              text-shadow: 4px 4px 0 ${theme.primary}, 8px 8px 0 ${theme.secondary};
+              letter-spacing: 4px;
+            }
+            .header .tagline {
+              background: ${theme.primary};
+              color: white;
+              padding: 5px 15px;
+              display: inline-block;
+              margin-top: 10px;
+              font-style: normal;
+              text-transform: uppercase;
+              letter-spacing: 2px;
+            }
+          `;
+        case 'wave':
+          return base + `
+            .header {
+              padding: ${state.spacing * 3}px ${state.spacing * 2}px ${state.spacing * 4}px;
+              background: linear-gradient(180deg, ${theme.primary}20 0%, ${theme.bg} 100%);
+              position: relative;
+            }
+            .header::after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 50px;
+              background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 C300,100 600,20 900,60 C1050,80 1150,50 1200,60 L1200,120 L0,120 Z' fill='${encodeURIComponent(theme.bg)}'/%3E%3C/svg%3E");
+              background-size: cover;
+            }
+            .header h1 { font-size: 2.8em; }
+          `;
+        case 'split':
+          return base + `
+            .header {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              min-height: 200px;
+            }
+            .header-left {
+              background: ${theme.primary};
+              padding: ${state.spacing * 2}px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+            }
+            .header-right {
+              background: ${theme.secondary};
+              padding: ${state.spacing * 2}px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .header h1 { font-size: 2.5em; color: white; }
+            .header .tagline { color: rgba(255,255,255,0.85); }
+            .search-bar input { background: rgba(255,255,255,0.95); }
+          `;
+      }
+    }
+
+    function getHeaderHTML(theme) {
+      const emoji = state.animateTitle ? '<span class="header-emoji">🏓</span>' : '🏓';
+
+      if (state.headerStyle === 'floating') {
+        return `
+          <header class="header">
+            <h1>${emoji} PingDico</h1>
+            <div class="search-bar">
+              <input type="text" placeholder="Rechercher un terme...">
+            </div>
+          </header>
+        `;
+      }
+
+      if (state.headerStyle === 'split') {
+        return `
+          <header class="header">
+            <div class="header-left">
+              <h1>${emoji} PingDico</h1>
+              <p class="tagline">Le dico qui gratte</p>
+            </div>
+            <div class="header-right">
+              <div class="search-bar">
+                <input type="text" placeholder="Rechercher un terme...">
+              </div>
+            </div>
+          </header>
+        `;
+      }
+
+      return `
+        <header class="header">
+          <h1>${emoji} PingDico</h1>
+          <p class="tagline">Le dico qui gratte</p>
+          <div class="search-bar" style="margin-top: ${state.spacing}px">
+            <input type="text" placeholder="Rechercher un terme...">
+          </div>
+        </header>
+      `;
+    }
+
+    function getLayoutStyles(theme) {
+      const gap = state.spacing + 'px';
+
+      switch (state.layout) {
+        case 'grid':
+          return `
+            .terms-container.grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+              gap: ${gap};
+            }
+          `;
+        case 'masonry':
+          return `
+            .terms-container.masonry {
+              columns: 3;
+              column-gap: ${gap};
+            }
+            @media (max-width: 900px) { .terms-container.masonry { columns: 2; } }
+            @media (max-width: 600px) { .terms-container.masonry { columns: 1; } }
+            .terms-container.masonry .term-card {
+              break-inside: avoid;
+              margin-bottom: ${gap};
+            }
+          `;
+        case 'list':
+          return `
+            .terms-container.list {
+              max-width: 700px;
+              margin: 0 auto;
+              display: flex;
+              flex-direction: column;
+              gap: ${gap};
+            }
+          `;
+        case 'magazine':
+          return `
+            .terms-container.magazine {
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+              grid-auto-rows: 150px;
+              gap: ${gap};
+            }
+            .terms-container.magazine .term-card:nth-child(1) { grid-column: span 4; grid-row: span 2; }
+            .terms-container.magazine .term-card:nth-child(2) { grid-column: span 2; grid-row: span 2; }
+            .terms-container.magazine .term-card:nth-child(3) { grid-column: span 2; }
+            .terms-container.magazine .term-card:nth-child(4) { grid-column: span 2; }
+            .terms-container.magazine .term-card:nth-child(5) { grid-column: span 2; }
+            @media (max-width: 800px) {
+              .terms-container.magazine { grid-template-columns: 1fr; }
+              .terms-container.magazine .term-card { grid-column: span 1 !important; grid-row: span 1 !important; }
+            }
+          `;
+        case 'carousel':
+          return `
+            .terms-container.carousel {
+              display: flex;
+              gap: ${gap};
+              overflow-x: auto;
+              scroll-snap-type: x mandatory;
+              padding-bottom: 20px;
+            }
+            .terms-container.carousel .term-card {
+              flex: 0 0 320px;
+              scroll-snap-align: start;
+            }
+          `;
+        case 'bento':
+          return `
+            .terms-container.bento {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              grid-auto-rows: 180px;
+              gap: ${gap};
+            }
+            .terms-container.bento .term-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+            .terms-container.bento .term-card:nth-child(2) { grid-column: span 1; }
+            .terms-container.bento .term-card:nth-child(3) { grid-column: span 1; }
+            .terms-container.bento .term-card:nth-child(4) { grid-column: span 2; }
+            .terms-container.bento .term-card:nth-child(5) { grid-column: span 2; }
+            @media (max-width: 800px) {
+              .terms-container.bento { grid-template-columns: repeat(2, 1fr); }
+              .terms-container.bento .term-card { grid-column: span 1 !important; grid-row: span 1 !important; }
+            }
+          `;
+      }
+    }
+
+    function getCardStyles(theme) {
+      const radius = state.borderRadius + 'px';
+      const titleFont = fontFamilies[state.titleFont];
+      const hoverTransform = state.hoverEffect ? 'transform: translateY(-4px);' : '';
+      const hoverShadow = state.hoverEffect ? `box-shadow: 0 12px 30px ${theme.primary}30;` : '';
+
+      const base = `
+        .term-card {
+          padding: ${state.spacing}px;
+          transition: all 0.3s ease;
+          overflow: hidden;
+        }
+        .term-card:hover {
+          ${hoverTransform}
+          ${hoverShadow}
+        }
+        .term-card h3 {
+          font-family: ${titleFont};
+          margin: 0 0 8px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .term-card .emoji {
+          font-size: 1.5em;
+        }
+        .term-card .definition {
+          color: ${theme.text};
+          line-height: 1.6;
+          margin-bottom: 12px;
+        }
+        .term-card .exemple {
+          font-style: italic;
+          color: ${theme.muted};
+          padding-left: 12px;
+          border-left: 3px solid ${theme.primary};
+          margin-bottom: 12px;
+        }
+        .term-card .badge {
+          display: inline-block;
+          padding: 4px 10px;
+          border-radius: 20px;
+          font-size: 0.75em;
+          font-weight: 600;
+        }
+        .term-card .variantes {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 12px;
+          padding-top: 12px;
+          border-top: 1px dashed ${theme.text}20;
+          font-size: 0.85em;
+          color: ${theme.muted};
+        }
+      `;
+
+      switch (state.cardStyle) {
+        case 'elevated':
+          return base + `
+            .term-card {
+              background: ${theme.surface};
+              border-radius: ${radius};
+              box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            }
+          `;
+        case 'flat':
+          return base + `
+            .term-card {
+              background: ${theme.surface};
+              border: 1px solid ${theme.text}20;
+              border-radius: ${radius};
+            }
+          `;
+        case 'glassmorphism':
+          return base + `
+            .term-card {
+              background: ${theme.surface}88;
+              backdrop-filter: blur(10px);
+              border: 1px solid ${theme.text}15;
+              border-radius: ${radius};
+              box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            }
+          `;
+        case 'neumorphism':
+          return base + `
+            .term-card {
+              background: ${theme.bg};
+              border-radius: ${radius};
+              box-shadow: 8px 8px 16px ${theme.text}10, -8px -8px 16px ${theme.surface};
+            }
+          `;
+        case 'comic':
+          return base + `
+            .term-card {
+              background: ${theme.surface};
+              border: 3px solid ${theme.text};
+              border-radius: ${radius};
+              box-shadow: 6px 6px 0 ${theme.text};
+              position: relative;
+            }
+            .term-card h3 {
+              text-transform: uppercase;
+              letter-spacing: 1px;
+            }
+          `;
+        case 'sticky':
+          const stickyColors = ['#fff9b1', '#ffb3ba', '#baffc9', '#bae1ff', '#e8d5ff'];
+          return base + `
+            .term-card {
+              background: #fff9b1;
+              border-radius: 2px;
+              box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+              transform: rotate(-1deg);
+              position: relative;
+            }
+            .term-card:nth-child(2n) { background: #ffb3ba; transform: rotate(1deg); }
+            .term-card:nth-child(3n) { background: #baffc9; transform: rotate(-0.5deg); }
+            .term-card:nth-child(4n) { background: #bae1ff; transform: rotate(0.5deg); }
+            .term-card h3 { color: #2d3436 !important; }
+            .term-card .definition { color: #2d3436 !important; }
+            .term-card::before {
+              content: "";
+              position: absolute;
+              top: -8px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 40px;
+              height: 16px;
+              background: rgba(0,0,0,0.1);
+              border-radius: 2px;
+            }
+          `;
+        case 'brutalist':
+          return base + `
+            .term-card {
+              background: ${theme.surface};
+              border: 2px solid ${theme.text};
+              position: relative;
+            }
+            .term-card::before {
+              content: "";
+              position: absolute;
+              top: 4px;
+              left: 4px;
+              right: -4px;
+              bottom: -4px;
+              background: ${theme.primary};
+              z-index: -1;
+            }
+            .term-card h3 {
+              text-transform: uppercase;
+              font-weight: 900;
+            }
+          `;
+      }
+    }
+
+    function getCardHTML(terme, index, theme) {
+      const cat = categories[terme.categorie];
+      const emoji = state.showEmojis ? `<span class="emoji">${terme.emoji}</span>` : '';
+      const badge = state.showBadges ? `<span class="badge" style="background: ${cat.color}20; color: ${cat.color}">${cat.emoji} ${cat.label}</span>` : '';
+      const variantes = state.showVariants && terme.variantes.length > 0 ? `
+        <div class="variantes">
+          🌍 ${terme.variantes.map(v => `${v.pays} ${v.terme}`).join(' · ')}
+        </div>
+      ` : '';
+
+      return `
+        <article class="term-card">
+          <h3>${emoji} ${terme.terme}</h3>
+          ${badge}
+          <p class="definition">${terme.definition}</p>
+          <p class="exemple">💬 ${terme.exemple}</p>
+          ${variantes}
+        </article>
+      `;
+    }
+
+    function updatePrompt() {
+      const parts = [];
+
+      // Theme
+      const themeNames = {
+        vibrant: "orange vif et bleu table (palette PRD)",
+        neon: "néon cyber avec accents cyan/magenta",
+        mono: "monochrome noir et blanc",
+        pastel: "tons pastels doux",
+        forest: "vert forêt naturel",
+        sunset: "dégradé coucher de soleil"
+      };
+      parts.push(`thème ${themeNames[state.colorTheme]}${state.darkMode ? ' en mode sombre' : ''}`);
+
+      // Layout
+      const layoutNames = {
+        grid: "grille responsive",
+        masonry: "masonry à colonnes",
+        list: "liste verticale centrée",
+        magazine: "layout magazine asymétrique",
+        carousel: "carousel horizontal scrollable",
+        bento: "grille bento box"
+      };
+      parts.push(`disposition en ${layoutNames[state.layout]} avec espacement de ${state.spacing}px`);
+
+      // Header
+      const headerNames = {
+        classic: "classique centré",
+        bold: "bold avec dégradé et clip-path diagonal",
+        floating: "sticky flottant minimaliste",
+        retro: "rétro arcade avec text-shadow",
+        wave: "avec vague SVG en bas",
+        split: "split diagonal bicolore"
+      };
+      parts.push(`header ${headerNames[state.headerStyle]}${state.animateTitle ? ' avec animation du logo' : ''}`);
+
+      // Cards
+      const cardNames = {
+        elevated: "élevées avec ombre portée",
+        flat: "plates avec bordure fine",
+        glassmorphism: "glassmorphism avec blur backdrop",
+        neumorphism: "neumorphism avec ombres douces",
+        comic: "style bande dessinée avec bordure épaisse et box-shadow offset",
+        sticky: "style post-it colorés avec légère rotation",
+        brutalist: "brutalistes avec pseudo-élément coloré décalé"
+      };
+      parts.push(`cartes ${cardNames[state.cardStyle]} avec border-radius de ${state.borderRadius}px${state.hoverEffect ? ' et effet hover lift' : ''}`);
+
+      // Typography
+      const fontNames = {
+        inter: "Inter",
+        poppins: "Poppins",
+        space: "Space Grotesk",
+        playfair: "Playfair Display",
+        bangers: "Bangers",
+        bebas: "Bebas Neue"
+      };
+      parts.push(`typographie ${fontNames[state.titleFont]} pour les titres, taille de base ${state.fontSize}px`);
+
+      // Features
+      const features = [];
+      if (state.showEmojis) features.push("emojis dans les cartes");
+      if (state.showBadges) features.push("badges de catégorie colorés");
+      if (state.showVariants) features.push("variantes régionales");
+      if (features.length > 0) {
+        parts.push(`avec ${features.join(', ')}`);
+      }
+
+      const prompt = `Crée le site PingDico ("Le dico qui gratte") avec les caractéristiques suivantes :
+
+- ${parts.join('\n- ')}
+
+Le site doit être mobile-first, avec un bouton "mot au hasard", des filtres par catégorie, et un footer avec crédits. Utilise Tailwind CSS et React/Next.js.`;
+
+      document.getElementById('promptText').textContent = prompt;
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+[
+  {
+    "id": "carotte",
+    "terme": "Carotte",
+    "definition": "Point gagné par la chance pure, souvent sur une balle qui frôle le filet ou la table de manière improbable.",
+    "exemple": "\"Il m'a mis 6 carottes en un set, j'étais dégoûté !\"",
+    "categorie": "chance",
+    "emoji": "🥕",
+    "synonymes": ["gratte", "bol", "mioche"],
+    "niveau": 1
+  },
+  {
+    "id": "gratte",
+    "terme": "Gratte",
+    "definition": "Synonyme de carotte. Point volé par la chance, particulièrement quand la balle touche le bord de la table.",
+    "exemple": "\"Encore une gratte sur balle de set, c'est injuste !\"",
+    "categorie": "chance",
+    "emoji": "🍀",
+    "synonymes": ["carotte", "bol"],
+    "niveau": 1
+  },
+  {
+    "id": "filet",
+    "terme": "Filet",
+    "definition": "Balle qui touche le filet et retombe du bon côté, provoquant la frustration de l'adversaire.",
+    "exemple": "\"Désolé pour le filet... enfin pas trop désolé en fait.\"",
+    "categorie": "chance",
+    "emoji": "🎰",
+    "synonymes": ["netball"],
+    "niveau": 1
+  },
+  {
+    "id": "bord",
+    "terme": "Bord",
+    "definition": "Balle qui touche l'arête de la table et part dans une direction imprévisible. Le summum de la gratte.",
+    "exemple": "\"Un bord à 10-10, j'ai failli renverser la table.\"",
+    "categorie": "chance",
+    "emoji": "📐",
+    "synonymes": ["edge ball"],
+    "niveau": 1
+  },
+  {
+    "id": "flip",
+    "terme": "Flip",
+    "definition": "Coup offensif sur une balle courte, exécuté du poignet au-dessus de la table. Le coup des pros pour surprendre.",
+    "exemple": "\"Son flip revers est injouable, je sers plus court maintenant.\"",
+    "categorie": "coups",
+    "emoji": "🔄",
+    "synonymes": ["pichenette"],
+    "niveau": 2
+  },
+  {
+    "id": "topspin",
+    "terme": "Topspin",
+    "definition": "Coup lifté avec rotation vers l'avant, la base du ping moderne. Fait plonger la balle sur la table.",
+    "exemple": "\"Son topspin coup droit dégage un de ces bruits !\"",
+    "categorie": "coups",
+    "emoji": "🌀",
+    "synonymes": ["lift", "top"],
+    "niveau": 1
+  },
+  {
+    "id": "smash",
+    "terme": "Smash",
+    "definition": "Frappe puissante et plate sur une balle haute. Le coup qui fait du bruit et impressionne la galerie.",
+    "exemple": "\"J'ai smasher tellement fort que la balle a fini dans les gradins.\"",
+    "categorie": "coups",
+    "emoji": "💥",
+    "synonymes": ["kill", "patate"],
+    "niveau": 1
+  },
+  {
+    "id": "bloc",
+    "terme": "Bloc",
+    "definition": "Coup défensif qui utilise la vitesse de l'adversaire. Raquette quasi immobile, timing parfait.",
+    "exemple": "\"Il ne fait que bloquer mais c'est hyper efficace !\"",
+    "categorie": "coups",
+    "emoji": "🧱",
+    "synonymes": ["block"],
+    "niveau": 1
+  },
+  {
+    "id": "coupure",
+    "terme": "Coupure",
+    "definition": "Balle avec beaucoup d'effet coupé (backspin), qui flotte puis plonge dans le filet de l'adversaire.",
+    "exemple": "\"Sa coupure est tellement lourde que ma balle va dans le filet.\"",
+    "categorie": "coups",
+    "emoji": "✂️",
+    "synonymes": ["backspin", "coupe"],
+    "niveau": 1
+  },
+  {
+    "id": "defense",
+    "terme": "Défense",
+    "definition": "Style de jeu basé sur le renvoi loin de la table avec beaucoup de coupé. Patient et frustrant.",
+    "exemple": "\"Jouer contre un défenseur, c'est 45 minutes de souffrance.\"",
+    "categorie": "coups",
+    "emoji": "🛡️",
+    "synonymes": ["chop"],
+    "niveau": 2
+  },
+  {
+    "id": "sidespin",
+    "terme": "Sidespin",
+    "definition": "Effet latéral sur la balle. Fait dévier la trajectoire et complique la vie du receveur.",
+    "exemple": "\"Son service sidespin part tellement sur le côté !\"",
+    "categorie": "coups",
+    "emoji": "↪️",
+    "synonymes": ["latéral", "side"],
+    "niveau": 2
+  },
+  {
+    "id": "service-marteau",
+    "terme": "Service marteau",
+    "definition": "Service exécuté avec un geste de haut en bas, comme si on plantait un clou. Génère beaucoup d'effet.",
+    "exemple": "\"Son marteau revers est impossible à lire.\"",
+    "categorie": "services",
+    "emoji": "🔨",
+    "synonymes": ["tomahawk"],
+    "niveau": 2
+  },
+  {
+    "id": "service-bombe",
+    "terme": "Service bombe",
+    "definition": "Service long et rapide visant à surprendre l'adversaire. Risqué mais efficace si bien placé.",
+    "exemple": "\"Service bombe dans le coude, il n'a rien pu faire.\"",
+    "categorie": "services",
+    "emoji": "💣",
+    "synonymes": ["fusée"],
+    "niveau": 1
+  },
+  {
+    "id": "service-court",
+    "terme": "Service court",
+    "definition": "Service qui rebondit deux fois sur la demi-table adverse. Empêche l'attaque directe.",
+    "exemple": "\"Fais des services courts, il déteste ça.\"",
+    "categorie": "services",
+    "emoji": "📍",
+    "synonymes": [],
+    "niveau": 1
+  },
+  {
+    "id": "service-rentrant",
+    "terme": "Service rentrant",
+    "definition": "Service avec effet qui ramène la balle vers le serveur. Piège classique pour les débutants.",
+    "exemple": "\"Service rentrant, il a tout renvoyé dans le filet.\"",
+    "categorie": "services",
+    "emoji": "🔙",
+    "synonymes": [],
+    "niveau": 2
+  },
+  {
+    "id": "revetement",
+    "terme": "Revêtement",
+    "definition": "La mousse et le caoutchouc collés sur le bois. Le nerf de la guerre pour les équipementiers.",
+    "exemple": "\"J'ai changé de revêtement, maintenant j'ai +500 points.\"",
+    "categorie": "materiel",
+    "emoji": "🧽",
+    "synonymes": ["rubber", "plaque"],
+    "niveau": 1
+  },
+  {
+    "id": "bois",
+    "terme": "Bois",
+    "definition": "La palette de la raquette, sans les revêtements. Chaque bois a ses caractéristiques uniques.",
+    "exemple": "\"C'est quoi ton bois ? Un Primorac ? Un Timo Boll ?\"",
+    "categorie": "materiel",
+    "emoji": "🪵",
+    "synonymes": ["palette", "blade"],
+    "niveau": 1
+  },
+  {
+    "id": "picots",
+    "terme": "Picots",
+    "definition": "Revêtement avec des petits cônes en caoutchouc. Génère des effets imprévisibles. Détesté par beaucoup.",
+    "exemple": "\"Encore un joueur de picots, je vais souffrir.\"",
+    "categorie": "materiel",
+    "emoji": "🦔",
+    "synonymes": ["pips", "tétons"],
+    "niveau": 2
+  },
+  {
+    "id": "antispin",
+    "terme": "Anti-spin",
+    "definition": "Revêtement lisse qui annule les effets. L'arme secrète des joueurs vicieux.",
+    "exemple": "\"Il a un anti côté revers, fais gaffe à tes topspins.\"",
+    "categorie": "materiel",
+    "emoji": "🪞",
+    "synonymes": ["anti"],
+    "niveau": 3
+  },
+  {
+    "id": "colle",
+    "terme": "Colle",
+    "definition": "Produit pour fixer le revêtement sur le bois. Autrefois dopante (colle rapide), maintenant réglementée.",
+    "exemple": "\"Tu as de la colle ? Mon revêtement se décolle.\"",
+    "categorie": "materiel",
+    "emoji": "🧴",
+    "synonymes": [],
+    "niveau": 2
+  },
+  {
+    "id": "classement",
+    "terme": "Classement",
+    "definition": "Le système de points FFTT qui classe les joueurs. Obsession de tout pongiste licencié.",
+    "exemple": "\"J'ai pris 150 points ce mois-ci, je passe 1200 !\"",
+    "categorie": "resultats",
+    "emoji": "📈",
+    "synonymes": ["ranking", "points"],
+    "niveau": 1
+  },
+  {
+    "id": "partie-officielle",
+    "terme": "Partie officielle",
+    "definition": "Match comptant pour le classement. Le stress monte d'un cran.",
+    "exemple": "\"C'est une partie off, concentre-toi !\"",
+    "categorie": "resultats",
+    "emoji": "📋",
+    "synonymes": ["off", "partie off"],
+    "niveau": 1
+  },
+  {
+    "id": "mutuelle",
+    "terme": "Mutuelle",
+    "definition": "Match entre deux joueurs de la même équipe qui ne compte pas. Moment de détente.",
+    "exemple": "\"On fait la mutuelle ? Pas de pression.\"",
+    "categorie": "resultats",
+    "emoji": "🤝",
+    "synonymes": [],
+    "niveau": 2
+  },
+  {
+    "id": "belle",
+    "terme": "Belle",
+    "definition": "Le set décisif quand les deux joueurs sont à égalité. Tension maximale.",
+    "exemple": "\"3-3 dans les sets, on joue la belle !\"",
+    "categorie": "resultats",
+    "emoji": "⚔️",
+    "synonymes": ["décisive"],
+    "niveau": 1
+  },
+  {
+    "id": "bulle",
+    "terme": "Bulle",
+    "definition": "Perdre sans marquer un seul point dans un set (11-0 ou 21-0 à l'ancienne).",
+    "exemple": "\"Je lui ai mis une bulle au premier set, il était démoralisé.\"",
+    "categorie": "resultats",
+    "emoji": "🫧",
+    "synonymes": ["fanny"],
+    "niveau": 1
+  },
+  {
+    "id": "remonter",
+    "terme": "Remonter",
+    "definition": "Gagner un match après avoir été mené. L'exploit mental du pongiste.",
+    "exemple": "\"J'étais mené 0-3, j'ai remonté 4-3, meilleur match de ma vie.\"",
+    "categorie": "resultats",
+    "emoji": "🔥",
+    "synonymes": ["comeback"],
+    "niveau": 1
+  },
+  {
+    "id": "craque",
+    "terme": "Craquer",
+    "definition": "Perdre ses moyens sous la pression, souvent en fin de set serré.",
+    "exemple": "\"J'ai craqué à 9-9, trois fautes directes de suite.\"",
+    "categorie": "expressions",
+    "emoji": "😰",
+    "synonymes": ["péter un câble", "tilter"],
+    "niveau": 1
+  },
+  {
+    "id": "etre-chaud",
+    "terme": "Être chaud",
+    "definition": "Être en pleine confiance, réussir tous ses coups. Le flow du pongiste.",
+    "exemple": "\"Laisse tomber, il est chaud ce soir, y'a rien à faire.\"",
+    "categorie": "expressions",
+    "emoji": "🔥",
+    "synonymes": ["être dedans", "être en place"],
+    "niveau": 1
+  },
+  {
+    "id": "lacher",
+    "terme": "Lâcher",
+    "definition": "Jouer sans retenue, tenter des coups risqués. Parfois la meilleure stratégie.",
+    "exemple": "\"Lâche tes topspins, t'as rien à perdre !\"",
+    "categorie": "expressions",
+    "emoji": "🚀",
+    "synonymes": ["envoyer"],
+    "niveau": 1
+  },
+  {
+    "id": "pousser",
+    "terme": "Pousser",
+    "definition": "Remettre la balle doucement, sans prendre de risque. Souvent péjoratif.",
+    "exemple": "\"Arrête de pousser, attaque un peu !\"",
+    "categorie": "expressions",
+    "emoji": "🐢",
+    "synonymes": [],
+    "niveau": 1
+  },
+  {
+    "id": "banane",
+    "terme": "Banane",
+    "definition": "Flip revers avec un mouvement courbé caractéristique. Coup signature de nombreux pros.",
+    "exemple": "\"Sa banane sur service court est imparable.\"",
+    "categorie": "coups",
+    "emoji": "🍌",
+    "synonymes": ["banana flick"],
+    "niveau": 2
+  },
+  {
+    "id": "bourreur",
+    "terme": "Bourreur",
+    "definition": "Joueur qui frappe fort sans subtilité. Efficace contre les petits classements.",
+    "exemple": "\"C'est un bourreur, attends ses fautes.\"",
+    "categorie": "personnages",
+    "emoji": "💪",
+    "synonymes": ["cogneur", "tapeur"],
+    "niveau": 1
+  },
+  {
+    "id": "gratteur",
+    "terme": "Gratteur",
+    "definition": "Joueur qui accumule les points chanceux. A une relation privilégiée avec les bords et filets.",
+    "exemple": "\"Gratteur professionnel ce mec, champion de France de la carotte.\"",
+    "categorie": "personnages",
+    "emoji": "🍀",
+    "synonymes": [],
+    "niveau": 1
+  },
+  {
+    "id": "vicieux",
+    "terme": "Vicieux",
+    "definition": "Joueur qui utilise du matériel atypique ou des tactiques sournoises. Souvent avec picots.",
+    "exemple": "\"Attention, il est vicieux avec son antispin.\"",
+    "categorie": "personnages",
+    "emoji": "🦊",
+    "synonymes": ["sournois"],
+    "niveau": 1
+  },
+  {
+    "id": "regulier",
+    "terme": "Régulier",
+    "definition": "Joueur qui fait peu de fautes et attend les erreurs adverses. Patience incarnée.",
+    "exemple": "\"Super régulier ce joueur, faut le faire craquer.\"",
+    "categorie": "personnages",
+    "emoji": "🧘",
+    "synonymes": ["placeur"],
+    "niveau": 1
+  },
+  {
+    "id": "attaquant",
+    "terme": "Attaquant",
+    "definition": "Joueur au style offensif, proche de la table, qui cherche à conclure rapidement.",
+    "exemple": "\"C'est un attaquant pur, éloigne-le de la table.\"",
+    "categorie": "personnages",
+    "emoji": "⚡",
+    "synonymes": ["offensif"],
+    "niveau": 1
+  },
+  {
+    "id": "veteran",
+    "terme": "Vétéran",
+    "definition": "Joueur de plus de 40 ans en compétition. Expérimenté et souvent sous-estimé.",
+    "exemple": "\"Les vétérans ont une lecture de jeu incroyable.\"",
+    "categorie": "personnages",
+    "emoji": "🎖️",
+    "synonymes": [],
+    "niveau": 1
+  },
+  {
+    "id": "ptb",
+    "terme": "PTB",
+    "definition": "Pongiste du Troisième Âge. Catégorie senior avec son propre championnat.",
+    "exemple": "\"Les PTB jouent souvent en journée, retraite oblige.\"",
+    "categorie": "personnages",
+    "emoji": "👴",
+    "synonymes": [],
+    "niveau": 2
+  }
+]

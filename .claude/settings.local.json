@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(open:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:www.fftt.com)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(git remote add:*)"
     ]
   }
 }
