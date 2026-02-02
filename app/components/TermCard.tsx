@@ -1,6 +1,6 @@
 "use client";
 
-import { Terme, CATEGORIES } from "@/app/types/terme";
+import { Terme } from "@/app/types/terme";
 
 interface TermCardProps {
   terme: Terme;
@@ -9,8 +9,6 @@ interface TermCardProps {
 }
 
 export default function TermCard({ terme, isHighlighted = false, onClick }: TermCardProps) {
-  const category = CATEGORIES.find((c) => c.id === terme.categorie);
-
   const handleClick = () => {
     window.history.pushState(null, "", `#${terme.id}`);
     onClick?.(terme.id);
@@ -61,13 +59,6 @@ export default function TermCard({ terme, isHighlighted = false, onClick }: Term
               )}
             </div>
 
-            {/* Category badge */}
-            {category && (
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-white/60 bg-[var(--color-muted)] px-2 py-0.5 rounded-full">
-                <span>{category.emoji}</span>
-                <span>{category.label}</span>
-              </span>
-            )}
           </div>
         </div>
 

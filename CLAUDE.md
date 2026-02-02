@@ -76,3 +76,4 @@ Path alias: `@/*` → root directory
 - Ton décalé, humour de vestiaire, jamais méchant
 - Lighthouse score cible: 90+
 - Ne jamais commiter sans demande explicite de l'utilisateur
+- Ne jamais lancer le serveur de dev (`npm run dev`)

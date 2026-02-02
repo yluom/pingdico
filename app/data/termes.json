@@ -1,5 +1,35 @@
 [
   {
+    "id": "plot",
+    "terme": "Plot",
+    "definition": "Joueur qui ne bouge pas de sa position. Économe en énergie, il attend que la balle vienne à lui.",
+    "exemple": "\"J'ai pas bougé de tout le match, je suis un plot !\"",
+    "categorie": "personnages",
+    "emoji": "🪵",
+    "synonymes": ["feignant"],
+    "priority": 1
+  },
+  {
+    "id": "precision",
+    "terme": "Précision !",
+    "definition": "Exclamation ironique après un point chanceux (filet, bord). Le summum du troll pongiste.",
+    "exemple": "\"Bord de table à 10-9... PRÉCISION !\"",
+    "categorie": "expressions",
+    "emoji": "🎯",
+    "synonymes": ["calculé"],
+    "priority": 1
+  },
+  {
+    "id": "bien-servi",
+    "terme": "Bien servi !",
+    "definition": "Expression sarcastique quand l'adversaire rate son service. Utilisée par les joueurs peu respectueux.",
+    "exemple": "\"Service adverse dans le filet... Bien servi !\"",
+    "categorie": "expressions",
+    "emoji": "🍽️",
+    "synonymes": [],
+    "priority": 1
+  },
+  {
     "id": "carotte",
     "terme": "Carotte",
     "definition": "Point gagné par la chance pure, souvent sur une balle qui frôle le filet ou la table de manière improbable.",
@@ -7,45 +37,9 @@
     "categorie": "chance",
     "emoji": "🥕",
     "synonymes": ["gratte", "bol"],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
-    "id": "flip",
-    "terme": "Flip",
-    "definition": "Coup offensif sur une balle courte, exécuté du poignet au-dessus de la table. Le coup des pros pour surprendre.",
-    "exemple": "\"Son flip revers est injouable, je sers plus court maintenant.\"",
-    "categorie": "coups",
-    "emoji": "🔄",
-    "synonymes": ["banane"],
-    "niveau": 2,
-    "type": "technique"
-  },
-  {
-    "id": "picots",
-    "terme": "Picots",
-    "definition": "Revêtement avec des petits cônes en caoutchouc. Génère des effets imprévisibles. Détesté par beaucoup.",
-    "exemple": "\"Encore un joueur de picots, je vais souffrir.\"",
-    "categorie": "materiel",
-    "emoji": "🦔",
-    "synonymes": [],
-    "niveau": 2,
-    "pepite": true,
-    "type": "technique"
-  },
-  {
-    "id": "antitop",
-    "terme": "Anti-top",
-    "definition": "Revêtement lisse qui annule ou inverse les effets. L'arme secrète des joueurs vicieux.",
-    "exemple": "\"Il a un antitop côté revers, fais gaffe à tes topspins.\"",
-    "categorie": "materiel",
-    "emoji": "🪞",
-    "synonymes": ["anti"],
-    "niveau": 3,
-    "type": "technique"
-  },
-      {
     "id": "bulle",
     "terme": "Bulle",
     "definition": "Perdre sans marquer un seul point dans un set (11-0 ou 21-0 à l'ancienne).",
@@ -53,9 +47,7 @@
     "categorie": "resultats",
     "emoji": "🫧",
     "synonymes": ["fanny"],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "comeback",
@@ -65,9 +57,7 @@
     "categorie": "resultats",
     "emoji": "🔥",
     "synonymes": ["remontada"],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "craque",
@@ -77,9 +67,7 @@
     "categorie": "expressions",
     "emoji": "😰",
     "synonymes": [],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "etre-chaud",
@@ -89,8 +77,7 @@
     "categorie": "expressions",
     "emoji": "🔥",
     "synonymes": ["être dedans", "être en place"],
-    "niveau": 1,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "lacher-ses-coups",
@@ -100,43 +87,17 @@
     "categorie": "expressions",
     "emoji": "🚀",
     "synonymes": ["envoyer"],
-    "niveau": 1,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "pousser",
     "terme": "Pousser",
     "definition": "Remettre la balle doucement, sans prendre de risque. Souvent péjoratif.",
-    "exemple": "\"Arrête de pousser, attaque un peu !\"",
+    "exemple": "\"Il faut que pousser, j'en peux plus!\"",
     "categorie": "coups",
     "emoji": "🐢",
     "synonymes": [],
-    "niveau": 1,
-    "type": "fun"
-  },
-  {
-    "id": "precision",
-    "terme": "Précision !",
-    "definition": "Exclamation ironique après un point chanceux. Le summum du troll pongiste.",
-    "exemple": "\"Bord de table à 10-9... PRÉCISION ! Tu l'avais calculé ?\"",
-    "categorie": "expressions",
-    "emoji": "🎯",
-    "synonymes": ["calculé"],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
-  },
-  {
-    "id": "bien-servi",
-    "terme": "Bien servi !",
-    "definition": "Expression sarcastique quand l'adversaire rate son service. Utilisée par les joueurs peu respectueux.",
-    "exemple": "\"Double faute au service... Bien servi ! Tu veux une fourchette aussi ?\"",
-    "categorie": "expressions",
-    "emoji": "🍽️",
-    "synonymes": [],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
     "id": "joue-ton-jeu",
@@ -146,11 +107,9 @@
     "categorie": "expressions",
     "emoji": "🎮",
     "synonymes": [],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
-    {
+  {
     "id": "gratteur",
     "terme": "Gratteur",
     "definition": "Joueur qui accumule les points chanceux. A une relation privilégiée avec les bords et filets.",
@@ -158,11 +117,9 @@
     "categorie": "personnages",
     "emoji": "🍀",
     "synonymes": [],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
-    {
+  {
     "id": "mur",
     "terme": "Mur",
     "definition": "Joueur qui remet absolument tout. Épuisant mentalement, tu as l'impression de jouer contre un robot.",
@@ -170,20 +127,36 @@
     "categorie": "personnages",
     "emoji": "🧱",
     "synonymes": [],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "priority": 10
   },
   {
-    "id": "plot",
-    "terme": "Plot",
-    "definition": "Joueur qui ne bouge pas de sa position. Économe en énergie, il attend que la balle vienne à lui.",
-    "exemple": "\"Ce plot n'a pas fait un pas de tout le match, et il a gagné !\"",
-    "categorie": "personnages",
-    "emoji": "🪵",
-    "synonymes": ["feignant"],
-    "niveau": 1,
-    "pepite": true,
-    "type": "fun"
+    "id": "flip",
+    "terme": "Flip",
+    "definition": "Coup offensif sur une balle courte, exécuté du poignet au-dessus de la table. Le coup des pros pour surprendre.",
+    "exemple": "\"Son flip revers est injouable, je sers plus court maintenant.\"",
+    "categorie": "coups",
+    "emoji": "🔄",
+    "synonymes": ["banane"],
+    "priority": 10
+  },
+  {
+    "id": "picots",
+    "terme": "Picots",
+    "definition": "Revêtement avec des petits cônes en caoutchouc. Génère des effets imprévisibles. Détesté par beaucoup.",
+    "exemple": "\"Encore un joueur de picots, je vais souffrir.\"",
+    "categorie": "materiel",
+    "emoji": "🦔",
+    "synonymes": [],
+    "priority": 10
+  },
+  {
+    "id": "antitop",
+    "terme": "Anti-top",
+    "definition": "Revêtement lisse qui annule ou inverse les effets. L'arme secrète des joueurs vicieux.",
+    "exemple": "\"Il a un antitop côté revers, fais gaffe à tes topspins.\"",
+    "categorie": "materiel",
+    "emoji": "🪞",
+    "synonymes": ["anti"],
+    "priority": 10
   }
 ]

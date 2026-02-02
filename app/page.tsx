@@ -1,12 +1,11 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { Terme, CATEGORIES, CategorieId } from "@/app/types/terme";
+import { Terme } from "@/app/types/terme";
 import termesData from "@/app/data/termes.json";
 import Header from "@/app/components/Header";
 import SearchBar from "@/app/components/SearchBar";
 import RandomWordButton from "@/app/components/RandomWordButton";
-import CategoryFilter from "@/app/components/CategoryFilter";
 import TermList from "@/app/components/TermList";
 import Footer from "@/app/components/Footer";
 
@@ -21,22 +20,17 @@ function normalizeString(str: string): string {
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<CategorieId | null>(null);
   const [highlightedTermId, setHighlightedTermId] = useState<string | null>(null);
 
   const filteredTermes = termes.filter((terme) => {
     const normalizedQuery = normalizeString(searchQuery);
 
-    const matchesSearch =
+    return (
       searchQuery === "" ||
       normalizeString(terme.terme).includes(normalizedQuery) ||
       normalizeString(terme.definition).includes(normalizedQuery) ||
-      terme.synonymes.some((syn) => normalizeString(syn).includes(normalizedQuery));
-
-    const matchesCategory =
-      selectedCategory === null || terme.categorie === selectedCategory;
-
-    return matchesSearch && matchesCategory;
+      terme.synonymes.some((syn) => normalizeString(syn).includes(normalizedQuery))
+    );
   });
 
   const handleSearchChange = useCallback((value: string) => {
@@ -44,14 +38,8 @@ export default function Home() {
     setHighlightedTermId(null);
   }, []);
 
-  const handleCategorySelect = useCallback((id: CategorieId | null) => {
-    setSelectedCategory(id);
-    setHighlightedTermId(null);
-  }, []);
-
   const scrollToTerm = useCallback((termeId: string) => {
     setSearchQuery("");
-    setSelectedCategory(null);
     setHighlightedTermId(termeId);
     window.history.pushState(null, "", `#${termeId}`);
 
@@ -68,9 +56,8 @@ export default function Home() {
   }, []);
 
   const handleRandomWord = useCallback(() => {
-    const funTermes = termes.filter((t) => t.type === "fun");
-    const randomIndex = Math.floor(Math.random() * funTermes.length);
-    const randomTerm = funTermes[randomIndex];
+    const randomIndex = Math.floor(Math.random() * termes.length);
+    const randomTerm = termes[randomIndex];
     scrollToTerm(randomTerm.id);
   }, [scrollToTerm]);
 
@@ -107,31 +94,22 @@ export default function Home() {
           <RandomWordButton onClick={handleRandomWord} />
         </div>
 
-        {/* Category filters */}
-        <div className="relative z-40 mb-8">
-          <CategoryFilter
-            categories={CATEGORIES}
-            selected={selectedCategory}
-            onSelect={handleCategorySelect}
-          />
+        {/* Accroche */}
+        <div className="mb-6 text-center">
+          <p className="text-lg sm:text-xl font-semibold text-[var(--color-foreground)]">
+            Tout le jargon pour briller au club 🏆
+          </p>
         </div>
 
         {/* Results count */}
         <div className="mb-4 text-sm text-[var(--color-foreground)]/60">
           {filteredTermes.length} terme{filteredTermes.length !== 1 ? "s" : ""}{" "}
           {searchQuery && `pour "${searchQuery}"`}
-          {selectedCategory && ` dans ${CATEGORIES.find((c) => c.id === selectedCategory)?.label}`}
         </div>
 
         {/* Terms grid */}
         <TermList
-          termes={[...filteredTermes].sort((a, b) => {
-            if (a.type === "fun" && b.type === "technique") return -1;
-            if (a.type === "technique" && b.type === "fun") return 1;
-            if (a.pepite && !b.pepite) return -1;
-            if (!a.pepite && b.pepite) return 1;
-            return 0;
-          })}
+          termes={[...filteredTermes].sort((a, b) => a.priority - b.priority)}
           highlightedId={highlightedTermId}
         />
       </main>

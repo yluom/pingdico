@@ -7,8 +7,6 @@ export type CategorieId =
   | "expressions"
   | "personnages";
 
-export type TermeType = "fun" | "technique";
-
 export interface Categorie {
   id: CategorieId;
   label: string;
@@ -23,9 +21,7 @@ export interface Terme {
   categorie: CategorieId;
   emoji: string;
   synonymes: string[];
-  niveau: 1 | 2 | 3;
-  pepite?: boolean;
-  type: TermeType;
+  priority: number;
 }
 
 export const CATEGORIES: Categorie[] = [
