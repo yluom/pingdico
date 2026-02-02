@@ -93,7 +93,7 @@
     "id": "pousser",
     "terme": "Pousser",
     "definition": "Remettre la balle doucement, sans prendre de risque. Souvent péjoratif.",
-    "exemple": "\"Il faut que pousser, j'en peux plus!\"",
+    "exemple": "\"Il fait que pousser, il veut pas jouer au ping avec moi :(\"",
     "categorie": "coups",
     "emoji": "🐢",
     "synonymes": [],
@@ -101,7 +101,7 @@
   },
   {
     "id": "joue-ton-jeu",
-    "terme": "Joue ton jeu",
+    "terme": "Jouer son jeu",
     "definition": "Conseil classique pour encourager un coéquipier à rester fidèle à son style au lieu de s'adapter à l'adversaire.",
     "exemple": "\"Arrête de réfléchir, joue ton jeu et ça va passer.\"",
     "categorie": "expressions",
