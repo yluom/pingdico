@@ -18,33 +18,46 @@ npm run lint     # ESLint (eslint-config-next)
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
+- **UI**: React 19
 - **Language**: TypeScript (strict mode)
 - **Style**: Tailwind CSS v4 (via @tailwindcss/postcss)
 - **Fonts**: Geist Sans/Mono via next/font
-- **Data**: JSON statique (à créer dans `app/data/termes.json`)
+- **Data**: JSON statique dans `app/data/termes.json`
 
 ## Architecture
 
 ```
 app/
-├── layout.tsx      # Root layout avec fonts Geist
-├── page.tsx        # Page principale
-├── globals.css     # Tailwind + CSS vars (--background, --foreground)
-└── data/           # (à créer) JSON des termes
+├── layout.tsx          # Root layout avec fonts Geist
+├── page.tsx            # Page principale (client component)
+├── globals.css         # Tailwind + CSS vars thème sombre
+├── types/
+│   └── terme.ts        # Interfaces TypeScript
+├── data/
+│   └── termes.json     # 16 termes statiques
+└── components/
+    ├── Header.tsx
+    ├── SearchBar.tsx
+    ├── TermCard.tsx
+    ├── TermList.tsx
+    ├── RandomWordButton.tsx
+    └── Footer.tsx
 ```
 
 Path alias: `@/*` → root directory
 
-## Design Specs (from PRD)
+## Design Specs
 
-### Palette
+### Palette (thème sombre)
 | Usage | Code |
 |-------|------|
-| Primaire (orange) | `#FF6B35` |
-| Secondaire (bleu table) | `#1E3A5F` |
-| Accent (vert) | `#2ECC71` |
-| Fond | `#FAFAFA` |
-| Texte | `#2D3436` |
+| Fond | `#0D0D0D` |
+| Texte | `#F5F5F5` |
+| Primary (rouge) | `#E63946` |
+| Accent | `#FF4D5A` |
+| Secondary | `#1A1A1A` |
+| Surface | `#161616` |
+| Muted | `#2A2A2A` |
 
 ### Catégories de termes
 - 🍀 `chance` - Grattes, carottes
@@ -56,17 +69,16 @@ Path alias: `@/*` → root directory
 - 🎭 `personnages` - Types de joueurs
 
 ### Structure d'un terme
-```json
-{
-  "id": "carotte",
-  "terme": "Carotte",
-  "definition": "Point gagné par la chance pure...",
-  "exemple": "\"Il m'a mis 6 carottes en un set\"",
-  "categorie": "chance",
-  "emoji": "🥕",
-  "variantes": [{ "terme": "Kartoffel", "pays": "🇩🇪", "note": "..." }],
-  "synonymes": ["gratte", "bol"],
-  "niveau": 1
+```typescript
+interface Terme {
+  id: string;
+  terme: string;
+  definition: string;
+  exemple: string;
+  categorie: CategorieId;
+  emoji: string;
+  synonymes: string[];
+  priority: number;
 }
 ```
 
