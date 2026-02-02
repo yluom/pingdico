@@ -7,7 +7,16 @@
       "WebFetch(domain:www.fftt.com)",
       "Bash(npm run lint:*)",
       "Bash(npm run build:*)",
-      "Bash(git remote add:*)"
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico diff)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico log:*)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico add app/types/terme.ts app/data/termes.json app/page.tsx app/components/TermCard.tsx CLAUDE.md)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico commit -m \"$\\(cat <<''EOF''\nRefactor: replace pepite/type/niveau by priority system\n\n- Add priority field to Terme interface \\(lower = higher in list\\)\n- Set priority 1 for featured terms: plot, précision, bien servi\n- Set priority 10 for all other terms\n- Simplify sorting logic in page.tsx\n- Remove unused category badge from TermCard\n- Remove CategoryFilter component and category selection\nEOF\n\\)\")",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico push)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico status)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico add app/components/CategoryFilter.tsx)",
+      "Bash(git -C /Users/leo.mouly/IdeaProjects/claude-tests/pingdico commit -m \"Remove unused CategoryFilter component\")"
     ]
   }
 }
