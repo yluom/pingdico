@@ -5,6 +5,7 @@
 ## Stack technique
 
 - **Framework**: Next.js 16 (App Router)
+- **UI**: React 19
 - **Language**: TypeScript (strict mode)
 - **Style**: Tailwind CSS v4
 - **Fonts**: Geist Sans/Mono
@@ -24,11 +25,19 @@ npm run lint     # ESLint
 ```
 app/
 ├── layout.tsx          # Root layout avec fonts Geist
-├── page.tsx            # Page principale
-├── globals.css         # Tailwind + CSS vars
-├── data/termes.json    # Données des termes
-├── types/terme.ts      # Types TypeScript
-└── components/         # Composants React
+├── page.tsx            # Page principale (client component)
+├── globals.css         # Tailwind + CSS vars (thème sombre)
+├── types/
+│   └── terme.ts        # Interfaces TypeScript
+├── data/
+│   └── termes.json     # 16 termes statiques
+└── components/
+    ├── Header.tsx
+    ├── SearchBar.tsx
+    ├── TermCard.tsx
+    ├── TermList.tsx
+    ├── RandomWordButton.tsx
+    └── Footer.tsx
 ```
 
 ## Catégories de termes
