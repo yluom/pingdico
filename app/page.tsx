@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Terme, CATEGORIES, CategorieId } from "@/app/types/terme";
 import termesData from "@/app/data/termes.json";
 import Header from "@/app/components/Header";
@@ -49,16 +49,14 @@ export default function Home() {
     setHighlightedTermId(null);
   }, []);
 
-  const handleRandomWord = useCallback(() => {
-    const randomIndex = Math.floor(Math.random() * termes.length);
-    const randomTerm = termes[randomIndex];
-
+  const scrollToTerm = useCallback((termeId: string) => {
     setSearchQuery("");
     setSelectedCategory(null);
-    setHighlightedTermId(randomTerm.id);
+    setHighlightedTermId(termeId);
+    window.history.pushState(null, "", `#${termeId}`);
 
     setTimeout(() => {
-      const element = document.getElementById(`terme-${randomTerm.id}`);
+      const element = document.getElementById(termeId);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
@@ -67,6 +65,29 @@ export default function Home() {
     setTimeout(() => {
       setHighlightedTermId(null);
     }, 3000);
+  }, []);
+
+  const handleRandomWord = useCallback(() => {
+    const funTermes = termes.filter((t) => t.type === "fun");
+    const randomIndex = Math.floor(Math.random() * funTermes.length);
+    const randomTerm = funTermes[randomIndex];
+    scrollToTerm(randomTerm.id);
+  }, [scrollToTerm]);
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setTimeout(() => {
+        setHighlightedTermId(hash);
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        setTimeout(() => {
+          setHighlightedTermId(null);
+        }, 3000);
+      }, 100);
+    }
   }, []);
 
   return (
@@ -103,7 +124,16 @@ export default function Home() {
         </div>
 
         {/* Terms grid */}
-        <TermList termes={filteredTermes} highlightedId={highlightedTermId} />
+        <TermList
+          termes={[...filteredTermes].sort((a, b) => {
+            if (a.type === "fun" && b.type === "technique") return -1;
+            if (a.type === "technique" && b.type === "fun") return 1;
+            if (a.pepite && !b.pepite) return -1;
+            if (!a.pepite && b.pepite) return 1;
+            return 0;
+          })}
+          highlightedId={highlightedTermId}
+        />
       </main>
 
       <Footer />

@@ -28,7 +28,7 @@ export default function TermList({ termes, highlightedId }: TermListProps) {
       {termes.map((terme, index) => (
         <div
           key={terme.id}
-          id={`terme-${terme.id}`}
+          id={terme.id}
           className="animate-fadeIn"
           style={{ animationDelay: `${index * 50}ms` }}
         >

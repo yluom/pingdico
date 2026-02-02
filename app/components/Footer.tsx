@@ -16,14 +16,20 @@ export default function Footer() {
 
       <div className="relative text-center">
         <p className="text-white/80 font-medium">
-          Fait avec{" "}
+          Fait avec passion pour le ping pong{" "}
           <span className="inline-block animate-bounce" style={{ animationDuration: "1s" }}>
             🏓
-          </span>{" "}
-          par des passionnés
+          </span>
         </p>
         <p className="text-white/40 text-sm mt-2">
-          © {new Date().getFullYear()} PingDico
+          <a
+            href="https://github.com/yluom/pingdico"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-[var(--color-primary)] transition-colors"
+          >
+            Source
+          </a>
         </p>
       </div>
     </footer>

@@ -5,14 +5,21 @@ import { Terme, CATEGORIES } from "@/app/types/terme";
 interface TermCardProps {
   terme: Terme;
   isHighlighted?: boolean;
+  onClick?: (id: string) => void;
 }
 
-export default function TermCard({ terme, isHighlighted = false }: TermCardProps) {
+export default function TermCard({ terme, isHighlighted = false, onClick }: TermCardProps) {
   const category = CATEGORIES.find((c) => c.id === terme.categorie);
+
+  const handleClick = () => {
+    window.history.pushState(null, "", `#${terme.id}`);
+    onClick?.(terme.id);
+  };
 
   return (
     <article
-      className={`group relative bg-[var(--color-surface)] rounded-2xl overflow-hidden transition-all duration-500 border border-[var(--color-muted)] ${
+      onClick={handleClick}
+      className={`group relative bg-[var(--color-surface)] rounded-2xl overflow-hidden transition-all duration-500 border border-[var(--color-muted)] cursor-pointer ${
         isHighlighted
           ? "ring-4 ring-[var(--color-primary)] ring-offset-2 ring-offset-[var(--color-background)] scale-[1.02] shadow-2xl shadow-[var(--color-primary)]/30"
           : "shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-[var(--color-primary)]/20 hover:-translate-y-1"
@@ -35,10 +42,24 @@ export default function TermCard({ terme, isHighlighted = false }: TermCardProps
           </div>
 
           <div className="flex-1 min-w-0">
-            {/* Term name */}
-            <h3 className="font-black text-xl text-white leading-tight mb-1 group-hover:text-[var(--color-primary)] transition-colors duration-300">
-              {terme.terme}
-            </h3>
+            {/* Term name + Synonyms inline */}
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-1">
+              <h3 className="font-black text-xl text-white leading-tight group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                {terme.terme}
+              </h3>
+              {terme.synonymes.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1">
+                  {terme.synonymes.map((syn) => (
+                    <span
+                      key={syn}
+                      className="inline-block px-1.5 py-0.5 text-[10px] font-medium bg-[var(--color-accent)]/15 text-[var(--color-accent)] rounded border border-[var(--color-accent)]/30"
+                    >
+                      {syn}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Category badge */}
             {category && (
@@ -56,28 +77,11 @@ export default function TermCard({ terme, isHighlighted = false }: TermCardProps
         </p>
 
         {/* Example */}
-        <div className="relative pl-4 mb-4 border-l-3 border-[var(--color-primary)]/50">
+        <div className="relative pl-4 border-l-3 border-[var(--color-primary)]/50">
           <p className="text-sm italic text-white/70">
             {terme.exemple}
           </p>
         </div>
-
-        {/* Synonyms */}
-        {terme.synonymes.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            <span className="text-xs font-semibold text-white/50 uppercase tracking-wide mr-1">
-              Syn.
-            </span>
-            {terme.synonymes.map((syn) => (
-              <span
-                key={syn}
-                className="inline-block px-2.5 py-1 text-xs font-medium bg-[var(--color-accent)]/15 text-[var(--color-accent)] rounded-full border border-[var(--color-accent)]/30"
-              >
-                {syn}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Decorative corner element */}
