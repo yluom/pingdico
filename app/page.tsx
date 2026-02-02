@@ -111,6 +111,7 @@ export default function Home() {
         <TermList
           termes={[...filteredTermes].sort((a, b) => a.priority - b.priority)}
           highlightedId={highlightedTermId}
+          onCardClick={scrollToTerm}
         />
       </main>
 

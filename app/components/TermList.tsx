@@ -6,9 +6,10 @@ import TermCard from "./TermCard";
 interface TermListProps {
   termes: Terme[];
   highlightedId: string | null;
+  onCardClick?: (termeId: string) => void;
 }
 
-export default function TermList({ termes, highlightedId }: TermListProps) {
+export default function TermList({ termes, highlightedId, onCardClick }: TermListProps) {
   if (termes.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
@@ -32,7 +33,7 @@ export default function TermList({ termes, highlightedId }: TermListProps) {
           className="animate-fadeIn"
           style={{ animationDelay: `${index * 50}ms` }}
         >
-          <TermCard terme={terme} isHighlighted={highlightedId === terme.id} />
+          <TermCard terme={terme} isHighlighted={highlightedId === terme.id} onCardClick={onCardClick} />
         </div>
       ))}
     </div>
