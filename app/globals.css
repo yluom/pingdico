@@ -28,15 +28,6 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Hide scrollbar for search suggestions */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 /* Card fade-in animation */
 @keyframes fadeIn {
   from {

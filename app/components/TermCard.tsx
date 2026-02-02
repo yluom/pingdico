@@ -5,13 +5,11 @@ import { Terme } from "@/app/types/terme";
 interface TermCardProps {
   terme: Terme;
   isHighlighted?: boolean;
-  onClick?: (id: string) => void;
 }
 
-export default function TermCard({ terme, isHighlighted = false, onClick }: TermCardProps) {
+export default function TermCard({ terme, isHighlighted = false }: TermCardProps) {
   const handleClick = () => {
     window.history.pushState(null, "", `#${terme.id}`);
-    onClick?.(terme.id);
   };
 
   return (
